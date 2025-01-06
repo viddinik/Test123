@@ -44,9 +44,9 @@
             groupBox1.Controls.Add(btnSil);
             groupBox1.Controls.Add(btnKaydet);
             groupBox1.Location = new Point(105, 8);
-            groupBox1.Margin = new Padding(2, 2, 2, 2);
+            groupBox1.Margin = new Padding(2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(2, 2, 2, 2);
+            groupBox1.Padding = new Padding(2);
             groupBox1.Size = new Size(494, 87);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
@@ -55,7 +55,7 @@
             // btnListele
             // 
             btnListele.Location = new Point(365, 28);
-            btnListele.Margin = new Padding(2, 2, 2, 2);
+            btnListele.Margin = new Padding(2);
             btnListele.Name = "btnListele";
             btnListele.Size = new Size(116, 45);
             btnListele.TabIndex = 0;
@@ -66,7 +66,7 @@
             // btnGuncelle
             // 
             btnGuncelle.Location = new Point(245, 28);
-            btnGuncelle.Margin = new Padding(2, 2, 2, 2);
+            btnGuncelle.Margin = new Padding(2);
             btnGuncelle.Name = "btnGuncelle";
             btnGuncelle.Size = new Size(116, 45);
             btnGuncelle.TabIndex = 0;
@@ -77,7 +77,7 @@
             // btnSil
             // 
             btnSil.Location = new Point(125, 28);
-            btnSil.Margin = new Padding(2, 2, 2, 2);
+            btnSil.Margin = new Padding(2);
             btnSil.Name = "btnSil";
             btnSil.Size = new Size(116, 45);
             btnSil.TabIndex = 0;
@@ -88,7 +88,7 @@
             // btnKaydet
             // 
             btnKaydet.Location = new Point(4, 28);
-            btnKaydet.Margin = new Padding(2, 2, 2, 2);
+            btnKaydet.Margin = new Padding(2);
             btnKaydet.Name = "btnKaydet";
             btnKaydet.Size = new Size(116, 45);
             btnKaydet.TabIndex = 0;
@@ -101,7 +101,7 @@
             lstListe.FormattingEnabled = true;
             lstListe.ItemHeight = 25;
             lstListe.Location = new Point(105, 99);
-            lstListe.Margin = new Padding(2, 2, 2, 2);
+            lstListe.Margin = new Padding(2);
             lstListe.Name = "lstListe";
             lstListe.Size = new Size(495, 129);
             lstListe.TabIndex = 1;
@@ -110,7 +110,7 @@
             // 
             AutoScaleDimensions = new SizeF(11F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(885, 416);
+            ClientSize = new Size(700, 453);
             Controls.Add(lstListe);
             Controls.Add(groupBox1);
             Font = new Font("Segoe UI", 14F);

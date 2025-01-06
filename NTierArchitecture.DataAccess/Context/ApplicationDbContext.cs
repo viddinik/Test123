@@ -20,7 +20,7 @@ namespace NTierArchitecture.DataAccess.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Ymyp6ECommerceDB;Integrated Security=True;");
+            optionsBuilder.UseSqlServer(@"Data Source=MERT\SQLEXPRESS01;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
