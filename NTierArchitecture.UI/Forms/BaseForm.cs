@@ -42,7 +42,7 @@ namespace NTierArchitecture.UI.Forms
 
         private void BaseForm_Load(object sender, EventArgs e)
         {
-
+            MessageBox.Show("Test");
         }
     }
 }
