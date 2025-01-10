@@ -2,3 +2,6 @@ ymyp6. grup proje 4.
 
 Entites mimarisinin içindeki sýnýflarý kodladým. 10.01.2025 - 17.10
 
+katmanlarýn ismi deðiþtirildi. 20.17
+sýnýflar silindi ve sadece dosyalar kaldý!
+

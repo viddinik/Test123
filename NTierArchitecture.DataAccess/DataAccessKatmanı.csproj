@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NTierArchitecture.Entities\NTierArchitecture.Entities.csproj" />
+    <ProjectReference Include="..\NTierArchitecture.Entities\EntitiesKatmanı.csproj" />
   </ItemGroup>
 
   <ItemGroup>

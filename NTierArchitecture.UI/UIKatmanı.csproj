@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NTierArchitecture.Business\NTierArchitecture.Business.csproj" />
-    <ProjectReference Include="..\NTierArchitecture.Entities\NTierArchitecture.Entities.csproj" />
+    <ProjectReference Include="..\NTierArchitecture.Business\BusinessKatmanı.csproj" />
+    <ProjectReference Include="..\NTierArchitecture.Entities\EntitiesKatmanı.csproj" />
   </ItemGroup>
 
   <ItemGroup>
