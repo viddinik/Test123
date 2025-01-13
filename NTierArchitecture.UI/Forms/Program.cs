@@ -1,6 +1,6 @@
 using NTierArchitecture.UI;
 
-namespace NTierArchitecture.UI
+namespace UIKatmaný.Forms
 {
     internal static class Program
     {
