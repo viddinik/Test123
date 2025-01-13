@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{9BF3E4B9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deneme", "deneme", "{7337C782-80B1-456F-AC01-94BD7EB02588}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NewFolder1", "NewFolder1", "{0286C804-E3F3-4567-AC6A-78938374AE8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0286C804-E3F3-4567-AC6A-78938374AE8E} = {7337C782-80B1-456F-AC01-94BD7EB02588}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CE59E3E2-1A83-4887-955B-8DF393DB5F0E}
