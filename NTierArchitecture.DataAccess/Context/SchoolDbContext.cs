@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 namespace DataAccessKatmanı.Context
 {
@@ -18,7 +20,7 @@ namespace DataAccessKatmanı.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("YourConnectionStringHere");
+            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["MertDb"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
