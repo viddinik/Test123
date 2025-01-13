@@ -3,18 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIKatmanı", "NTierArchitecture.UI\UIKatmanı.csproj", "{0DC92EFA-875E-47C7-A574-C76DCB64EBD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UIKatmanı", "NTierArchitecture.UI\UIKatmanı.csproj", "{0DC92EFA-875E-47C7-A574-C76DCB64EBD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessKatmanı", "NTierArchitecture.Business\BusinessKatmanı.csproj", "{7438E452-7064-4C94-AAF4-CD87733687B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessKatmanı", "NTierArchitecture.Business\BusinessKatmanı.csproj", "{7438E452-7064-4C94-AAF4-CD87733687B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessKatmanı", "NTierArchitecture.DataAccess\DataAccessKatmanı.csproj", "{C6771CDA-1CCD-4B63-AE53-BF1AF976FB34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessKatmanı", "NTierArchitecture.DataAccess\DataAccessKatmanı.csproj", "{C6771CDA-1CCD-4B63-AE53-BF1AF976FB34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntitiesKatmanı", "NTierArchitecture.Entities\EntitiesKatmanı.csproj", "{686A019C-EA01-49D1-87DA-CC8771CA921F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntitiesKatmanı", "NTierArchitecture.Entities\EntitiesKatmanı.csproj", "{686A019C-EA01-49D1-87DA-CC8771CA921F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{9BF3E4B9-87AD-4B53-87D9-2B31FCF76946}"
 	ProjectSection(SolutionItems) = preProject
 		notes.txt = notes.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deneme", "deneme", "{7337C782-80B1-456F-AC01-94BD7EB02588}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
