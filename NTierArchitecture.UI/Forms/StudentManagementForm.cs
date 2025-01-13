@@ -1,4 +1,5 @@
 ﻿using BusinessKatmanı.Services;
+using DataAccessKatmanı.Context;
 using NTierArchitecture.Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -114,8 +115,13 @@ namespace UIKatmanı
                 MessageBox.Show($"Hata: {ex.Message}");
             }
         }
-    
+
         private void StudentManagementForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
         {
 
         }
