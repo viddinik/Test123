@@ -11,5 +11,10 @@ namespace NTierArchitecture.UI
         {
             MessageBox.Show("Caner Deneme");
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
