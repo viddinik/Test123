@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataAccessKatmanı.Repositories
 {
-    internal class Class1
+    public class ClassRepository : GenericRepository<Class>
     {
+        public ClassRepository(SchoolDbContext context) : base(context)
+        {
+        }
     }
 }

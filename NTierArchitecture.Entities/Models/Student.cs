@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntitiesKatmanı.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NTierArchitecture.Entities.Models
 {
-    public class Student
+    public class Student : BaseEntity
     {
         public int Id { get; set; }
         public string? FullName { get; set; }

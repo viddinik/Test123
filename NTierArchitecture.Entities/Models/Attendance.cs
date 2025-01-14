@@ -1,6 +1,8 @@
-﻿namespace NTierArchitecture.Entities.Models
+﻿using EntitiesKatmanı.Abstractions;
+
+namespace NTierArchitecture.Entities.Models
 {
-    public class Attendance
+    public class Attendance : BaseEntity
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
