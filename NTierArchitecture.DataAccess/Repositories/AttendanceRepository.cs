@@ -1,4 +1,5 @@
-﻿using NTierArchitecture.Entities.Models;
+﻿using DataAccessKatmanı.Context;
+using NTierArchitecture.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,17 @@ namespace DataAccessKatmanı.Repositories
 
         }
 
-        public IEnumerable<Attendance> GetAttendances()
+        public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Attendance GetByID(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IfEntityExists(Func<object, bool> value)
         {
             throw new NotImplementedException();
         }

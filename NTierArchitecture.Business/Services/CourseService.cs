@@ -1,4 +1,8 @@
-﻿using NTierArchitecture.Entities.Models;
+﻿using BusinessKatmanı.Validators;
+using DataAccessKatmanı.Repositories;
+using FluentValidation;
+using FluentValidation.Results;
+using NTierArchitecture.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,39 +13,49 @@ namespace BusinessKatmanı.Services
 {
     public class CourseService
     {
-        private readonly SchoolDbContext _context;
+        private readonly CourseRepository _courseRepository;
 
-        public CourseService(SchoolDbContext context)
+        public CourseService(CourseRepository courseRepository)
         {
-            _context = context;
+            _courseRepository = courseRepository;
         }
 
-        public void AddCourse(Course newCourse)
+        public IEnumerable<Course> GetAllCourses()
         {
-            if (string.IsNullOrWhiteSpace(newCourse.Name))
-                throw new ArgumentException("Ders adı boş olamaz.");
-
-            if (_context.Courses.Any(c => c.Name == newCourse.Name))
-                throw new InvalidOperationException("Bu ders zaten mevcut.");
-
-            _context.Courses.Add(newCourse);
-            _context.SaveChanges();
+            return _courseRepository.GetAll();
         }
 
-        public List<Course> GetAllCourses()
+        public Course GetCourseById(int id)
         {
-            return _context.Courses.ToList();
+            return _courseRepository.GetByID(id);
         }
 
-        public void DeleteCourse(int courseId)
+        public void AddCourse(Course course)
         {
-            var existingCourse = _context.Courses.Find(courseId);
-            if (existingCourse == null)
-                throw new KeyNotFoundException("Ders bulunamadı.");
+            CourseValidator validator = new();
+            ValidationResult result = validator.Validate(course);
 
-            _context.Courses.Remove(existingCourse);
-            _context.SaveChanges();
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
+
+            _courseRepository.Add(course);
         }
 
+        public void UpdateCourse(Course course)
+        {
+            _courseRepository.Update(course);
+        }
+
+        public void DeleteCourse(int id)
+        {
+            _courseRepository.Delete(id);
+        }
+
+        public bool IfCourseExists(int id)
+        {
+            return _courseRepository.IfEntityExists(c => ((Course)c).Id == id);
+        }
     }
 }

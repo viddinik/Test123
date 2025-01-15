@@ -1,4 +1,8 @@
-﻿using NTierArchitecture.Entities.Models;
+﻿using BusinessKatmanı.Validators;
+using DataAccessKatmanı.Repositories;
+using FluentValidation;
+using FluentValidation.Results;
+using NTierArchitecture.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,38 +13,49 @@ namespace BusinessKatmanı.Services
 {
     public class ClassService
     {
-        private readonly SchoolDbContext _context;
+        private readonly ClassRepository _classRepository;
 
-        public ClassService(SchoolDbContext context)
+        public ClassService(ClassRepository classRepository)
         {
-            _context = context;
+            _classRepository = classRepository;
         }
 
-        public void AddClass(Class newClass)
+        public IEnumerable<Class> GetAllClasses()
         {
-            if (string.IsNullOrWhiteSpace(newClass.Name))
-                throw new ArgumentException("Sınıf adı boş olamaz.");
-
-            if (_context.Classes.Any(c => c.Name == newClass.Name))
-                throw new InvalidOperationException("Bu sınıf zaten mevcut.");
-
-            _context.Classes.Add(newClass);
-            _context.SaveChanges();
+            return _classRepository.GetAll();
         }
 
-        public List<Class> GetAllClasses()
+        public Class GetClassById(int id)
         {
-            return _context.Classes.ToList();
+            return _classRepository.GetByID(id);
         }
 
-        public void DeleteClass(int classId)
+        public void AddClass(Class classEntity)
         {
-            var existingClass = _context.Classes.Find(classId);
-            if (existingClass == null)
-                throw new KeyNotFoundException("Sınıf bulunamadı.");
+            ClassValidator validator = new();
+            ValidationResult result = validator.Validate(classEntity);
 
-            _context.Classes.Remove(existingClass);
-            _context.SaveChanges();
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
+
+            _classRepository.Add(classEntity);
+        }
+
+        public void UpdateClass(Class classEntity)
+        {
+            _classRepository.Update(classEntity);
+        }
+
+        public void DeleteClass(int id)
+        {
+            _classRepository.Delete(id);
+        }
+
+        public bool IfClassExists(int id)
+        {
+            return _classRepository.IfEntityExists(c => ((Class)c).Id == id);
         }
     }
 }

@@ -1,4 +1,8 @@
-﻿using NTierArchitecture.Entities.Models;
+﻿using BusinessKatmanı.Validators;
+using DataAccessKatmanı.Repositories;
+using FluentValidation;
+using FluentValidation.Results;
+using NTierArchitecture.Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,47 +13,49 @@ namespace BusinessKatmanı.Services
 {
     public class StudentService
     {
-        private readonly SchoolDbContext _context;
+        private readonly StudentRepository _studentRepository;
 
-        public StudentService(SchoolDbContext context)
+        public StudentService(StudentRepository studentRepository)
         {
-            _context = context;
+            _studentRepository = studentRepository;
+        }
+
+        public IEnumerable<Student> GetAllStudents()
+        {
+            return _studentRepository.GetAll();
+        }
+
+        public Student GetStudentById(int id)
+        {
+            return _studentRepository.GetByID(id);
         }
 
         public void AddStudent(Student student)
         {
-            if (string.IsNullOrWhiteSpace(student.FullName))
-                throw new ArgumentException("Öğrenci adı boş olamaz.");
+            StudentValidator validator = new();
+            ValidationResult result = validator.Validate(student);
 
-            _context.Students.Add(student);
-            _context.SaveChanges();
-        }
+            if (!result.IsValid)
+            {
+                throw new ValidationException(result.Errors);
+            }
 
-        public List<Student> GetAllStudents()
-        {
-            return _context.Students.ToList();
+            _studentRepository.Add(student);
         }
 
         public void UpdateStudent(Student student)
         {
-            var existingStudent = _context.Students.Find(student.Id);
-            if (existingStudent == null)
-                throw new KeyNotFoundException("Öğrenci bulunamadı.");
-
-            existingStudent.FullName = student.FullName;
-            existingStudent.ClassId = student.ClassId;
-            _context.SaveChanges();
+            _studentRepository.Update(student);
         }
 
-        public void DeleteStudent(int studentId)
+        public void DeleteStudent(int id)
         {
-            var student = _context.Students.Find(studentId);
-            if (student == null)
-                throw new KeyNotFoundException("Öğrenci bulunamadı.");
-
-            _context.Students.Remove(student);
-            _context.SaveChanges();
+            _studentRepository.Delete(id);
         }
 
+        public bool IfStudentExists(int id)
+        {
+            return _studentRepository.IfEntityExists(s => ((Student)s).Id == id);
+        }
     }
 }
