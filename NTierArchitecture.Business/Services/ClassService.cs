@@ -59,4 +59,3 @@ namespace BusinessKatmanı.Services
     }
 
 }
-}
