@@ -1,17 +1,10 @@
-﻿using BusinessKatmanı.Validators;
+﻿using DataAccessKatmanı.Abstractions;
 using DataAccessKatmanı.Repositories;
-using FluentValidation;
-using FluentValidation.Results;
 using NTierArchitecture.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessKatmanı.Services
 {
-    public class StudentService
+    public class StudentService : IManager<Student>
     {
         private readonly StudentRepository _studentRepository;
 
@@ -20,42 +13,50 @@ namespace BusinessKatmanı.Services
             _studentRepository = studentRepository;
         }
 
-        public IEnumerable<Student> GetAllStudents()
+        public void Add(Student entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _studentRepository.Add(entity);
+        }
+
+        public void Delete(Student entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _studentRepository.Delete(entity);
+        }
+
+        public IEnumerable<Student> GetAll()
         {
             return _studentRepository.GetAll();
         }
 
-        public Student GetStudentById(int id)
+        public IEnumerable<Student> GetAll(int id)
         {
-            return _studentRepository.GetByID(id);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
+
+            return _studentRepository.GetByCondition(s => ((Student)s).Id == id);
         }
 
-        public void AddStudent(Student student)
+        public Student GetById(int id)
         {
-            StudentValidator validator = new();
-            ValidationResult result = validator.Validate(student);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
 
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
-            _studentRepository.Add(student);
+            return _studentRepository.GetById(id);
         }
 
-        public void UpdateStudent(Student student)
+        public void Update(Student entity)
         {
-            _studentRepository.Update(student);
-        }
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-        public void DeleteStudent(int id)
-        {
-            _studentRepository.Delete(id);
-        }
-
-        public bool IfStudentExists(int id)
-        {
-            return _studentRepository.IfEntityExists(s => ((Student)s).Id == id);
+            _studentRepository.Update(entity);
         }
     }
 }
+

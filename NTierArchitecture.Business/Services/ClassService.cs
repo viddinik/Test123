@@ -1,17 +1,10 @@
-﻿using BusinessKatmanı.Validators;
+﻿using DataAccessKatmanı.Abstractions;
 using DataAccessKatmanı.Repositories;
-using FluentValidation;
-using FluentValidation.Results;
 using NTierArchitecture.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessKatmanı.Services
 {
-    public class ClassService
+    public class ClassService : IManager<Class>
     {
         private readonly ClassRepository _classRepository;
 
@@ -19,43 +12,51 @@ namespace BusinessKatmanı.Services
         {
             _classRepository = classRepository;
         }
+        public void Add(Class entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-        public IEnumerable<Class> GetAllClasses()
+            _classRepository.Add(entity);
+        }
+
+        public void Delete(Class entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _classRepository.Delete(entity);
+        }
+
+        public IEnumerable<Class> GetAll()
         {
             return _classRepository.GetAll();
         }
 
-        public Class GetClassById(int id)
+        public IEnumerable<Class> GetAll(int id)
         {
-            return _classRepository.GetByID(id);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
+
+            return _classRepository.GetByCondition(c => ((Class)c).Id == id);
         }
 
-        public void AddClass(Class classEntity)
+        public Class GetById(int id)
         {
-            ClassValidator validator = new();
-            ValidationResult result = validator.Validate(classEntity);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
 
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
-            _classRepository.Add(classEntity);
+            return _classRepository.GetById(id);
         }
 
-        public void UpdateClass(Class classEntity)
+        public void Update(Class entity)
         {
-            _classRepository.Update(classEntity);
-        }
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-        public void DeleteClass(int id)
-        {
-            _classRepository.Delete(id);
-        }
-
-        public bool IfClassExists(int id)
-        {
-            return _classRepository.IfEntityExists(c => ((Class)c).Id == id);
+            _classRepository.Update(entity);
         }
     }
+
+}
 }

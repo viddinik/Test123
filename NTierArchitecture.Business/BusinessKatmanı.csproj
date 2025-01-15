@@ -15,8 +15,4 @@
     <ProjectReference Include="..\NTierArchitecture.Entities\EntitiesKatmanı.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Abstractions\" />
-  </ItemGroup>
-
 </Project>

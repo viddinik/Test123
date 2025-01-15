@@ -12,19 +12,10 @@ namespace DataAccessKatmanı.Repositories
     {
         public StudentRepository(SchoolDbContext context) : base(context)
         {
+
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Student GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IfEntityExists(Func<object, bool> value)
+        public IEnumerable<Student> GetByCondition(Func<object, bool> value)
         {
             throw new NotImplementedException();
         }

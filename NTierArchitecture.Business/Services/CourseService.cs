@@ -1,17 +1,10 @@
-﻿using BusinessKatmanı.Validators;
+﻿using DataAccessKatmanı.Abstractions;
 using DataAccessKatmanı.Repositories;
-using FluentValidation;
-using FluentValidation.Results;
 using NTierArchitecture.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessKatmanı.Services
 {
-    public class CourseService
+    public class CourseService : IManager<Course>
     {
         private readonly CourseRepository _courseRepository;
 
@@ -20,42 +13,51 @@ namespace BusinessKatmanı.Services
             _courseRepository = courseRepository;
         }
 
-        public IEnumerable<Course> GetAllCourses()
+        public void Add(Course entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _courseRepository.Add(entity);
+        }
+
+        public void Delete(Course entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _courseRepository.Delete(entity);
+        }
+
+        public IEnumerable<Course> GetAll()
         {
             return _courseRepository.GetAll();
         }
 
-        public Course GetCourseById(int id)
+        public IEnumerable<Course> GetAll(int id)
         {
-            return _courseRepository.GetByID(id);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
+
+            return _courseRepository.GetByCondition(c => ((Course)c).Id == id);
         }
 
-        public void AddCourse(Course course)
+        public Course GetById(int id)
         {
-            CourseValidator validator = new();
-            ValidationResult result = validator.Validate(course);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
 
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
-            _courseRepository.Add(course);
+            return _courseRepository.GetById(id);
         }
 
-        public void UpdateCourse(Course course)
+        public void Update(Course entity)
         {
-            _courseRepository.Update(course);
-        }
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-        public void DeleteCourse(int id)
-        {
-            _courseRepository.Delete(id);
-        }
-
-        public bool IfCourseExists(int id)
-        {
-            return _courseRepository.IfEntityExists(c => ((Course)c).Id == id);
+            _courseRepository.Update(entity);
         }
     }
+
 }
+

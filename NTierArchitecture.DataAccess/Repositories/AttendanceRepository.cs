@@ -15,17 +15,7 @@ namespace DataAccessKatmanı.Repositories
 
         }
 
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Attendance GetByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IfEntityExists(Func<object, bool> value)
+        public IEnumerable<Attendance> GetByCondition(Func<object, bool> value)
         {
             throw new NotImplementedException();
         }

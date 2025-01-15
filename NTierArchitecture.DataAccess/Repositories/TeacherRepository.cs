@@ -19,6 +19,11 @@ namespace DataAccessKatmanı.Repositories
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Teacher> GetByCondition(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
+
         public Teacher GetByID(int id)
         {
             throw new NotImplementedException();

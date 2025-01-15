@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NTierArchitecture.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 namespace DataAccessKatmanı.Context
 {
@@ -42,5 +36,4 @@ namespace DataAccessKatmanı.Context
                 .HasForeignKey(a => a.CourseId);
         }
     }
-
 }

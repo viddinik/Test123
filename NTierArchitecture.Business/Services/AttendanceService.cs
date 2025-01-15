@@ -1,18 +1,10 @@
-﻿using BusinessKatmanı.Validators;
-using DataAccessKatmanı.Context;
+﻿using DataAccessKatmanı.Abstractions;
 using DataAccessKatmanı.Repositories;
-using FluentValidation;
-using FluentValidation.Results;
 using NTierArchitecture.Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessKatmanı.Services
 {
-    public class AttendanceService
+    public class AttendanceService : IManager<Attendance>
     {
         private readonly AttendanceRepository _attendanceRepository;
 
@@ -21,42 +13,49 @@ namespace BusinessKatmanı.Services
             _attendanceRepository = attendanceRepository;
         }
 
-        public IEnumerable<Attendance> GetAllAttendances()
+        public void Add(Attendance entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _attendanceRepository.Add(entity);
+        }
+
+        public void Delete(Attendance entity)
+        {
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
+
+            _attendanceRepository.Delete(entity);
+        }
+
+        public IEnumerable<Attendance> GetAll()
         {
             return _attendanceRepository.GetAll();
         }
 
-        public Attendance GetAttendanceById(int id)
+        public IEnumerable<Attendance> GetAll(int id)
         {
-            return _attendanceRepository.GetByID(id);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
+
+            return _attendanceRepository.GetByCondition(a => ((Attendance)a).Id == id);
         }
 
-        public void AddAttendance(Attendance attendance)
+        public Attendance GetById(int id)
         {
-            AttendanceValidator validator = new();
-            ValidationResult result = validator.Validate(attendance);
+            if (id <= 0)
+                throw new ArgumentException("Id must be greater than zero.", nameof(id));
 
-            if (!result.IsValid)
-            {
-                throw new ValidationException(result.Errors);
-            }
-
-            _attendanceRepository.Add(attendance);
+            return _attendanceRepository.GetById(id);
         }
 
-        public void UpdateAttendance(Attendance attendance)
+        public void Update(Attendance entity)
         {
-            _attendanceRepository.Update(attendance);
-        }
+            if (entity == null)
+                throw new ArgumentNullException(nameof(entity));
 
-        public void DeleteAttendance(int id)
-        {
-            _attendanceRepository.Delete(id);
-        }
-
-        public bool IfAttendanceExists(int id)
-        {
-            return _attendanceRepository.IfEntityExists(a => ((Attendance)a).Id == id);
+            _attendanceRepository.Update(entity);
         }
     }
 }
