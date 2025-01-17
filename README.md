@@ -1,1 +1,1 @@
-# NTierArchitecture.UI
+yoklama ve sınıf yönetimi proje
