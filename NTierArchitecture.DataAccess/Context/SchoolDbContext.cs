@@ -14,7 +14,6 @@ namespace DataAccessKatmanı.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["MertDb"].ConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
