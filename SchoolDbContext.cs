@@ -1,11 +1,19 @@
-ï»¿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NTierArchitecture.Entities.Models;
-using System.Configuration;
+using System;
 
-namespace DataAccessKatmanÄ±.Context
+namespace DataAccessKatmaný.Context
 {
     public class SchoolDbContext : DbContext
     {
+        private readonly IConfiguration _configuration;
+
+        public SchoolDbContext(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public DbSet<Student> Students { get; set; }
         public DbSet<Class> Classes { get; set; }
         public DbSet<Course> Courses { get; set; }
@@ -14,12 +22,13 @@ namespace DataAccessKatmanÄ±.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["MertDb"].ConnectionString);
+            var connectionString = _configuration.GetConnectionString("MertDb");
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // VeritabanÄ± iliÅŸkileri
+            // Veritabaný iliþkileri
             modelBuilder.Entity<Student>()
                 .HasOne<Class>()
                 .WithMany()
